@@ -1,24 +1,17 @@
 Template.home.rendered = function() {
 
-  var world = new Physics.world();
+  //TODO: move this else where.
 
-  var renderer = Physics.renderer('canvas', {
-    el: 'viewport', // id of the canvas element
-    width: 500,
-    height: 500
+  var level = new Spacehole.Level();
+
+  var renderer = new Spacehole.LevelRenderer(level, "viewport", 800, 600);
+
+  var world = level.world;
+
+  Physics.util.ticker.on(function( time, dt ){
+    world.step(time);
   });
 
-  world.add( renderer );
-
-  var square = Physics.body('rectangle', {
-    x: 250,
-    y: 250,
-    width: 50,
-    height: 50
-  });
-
-  world.add( square );
-  world.render();
+  Physics.util.ticker.start();
 
 }
-

@@ -32,3 +32,13 @@ html, body, .container {
   bottom: 0;
   background-color: rgba(0,0,0,0.5);
 }
+
+#score {
+  position: absolute;
+  right: 10px;
+  left: 10px;
+  font-family: sans-serif;
+  color: white;
+  font-size: 20px;
+  text-align: right;
+}

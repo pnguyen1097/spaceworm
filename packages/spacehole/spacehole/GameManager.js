@@ -9,7 +9,8 @@ var STATE = {
 };
 
 function GameManager() {
-  this.state = STATE.Running;
+  //this.state = STATE.Running;
+  this.resume();
 }
 
 GameManager.prototype = {
@@ -46,12 +47,13 @@ GameManager.prototype = {
   startListening: function() {
     document.addEventListener("keydown", this.handleKeyPress.bind(this));
 
-    this.world.on('collisions:detected', function( data ){
+    var world = this.world;
+    console.log(world);
+    world.on('collisions:detected', function( data ){
       var c;
       for (var i = 0, l = data.collisions.length; i < l; i++){
         c = data.collisions[i];
-        world.publish({
-          topic: 'collision-pair',
+        world.emit('collision-pair', {
           bodyA: c.bodyA,
           bodyB: c.bodyB
         });

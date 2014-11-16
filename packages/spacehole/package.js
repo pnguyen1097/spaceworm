@@ -23,6 +23,7 @@ Package.onUse(function (api) {
     'spacehole/StaticStar.js',
     'spacehole/DynamicStar.js',
     'spacehole/Wormhole.js',
+    'spacehole/Attractor.js',
     'spacehole/Level.js',
     'spacehole/LevelRenderer.js',
     'spacehole/GameManager.js'

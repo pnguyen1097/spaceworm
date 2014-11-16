@@ -37,6 +37,9 @@ function Level(data) {
       x: data.end.x,
       y: data.end.y
   }));
+  self.world.add(Spacehole.Attractor({
+    pos: data.end
+  }));
 
   self.world.add([
     Physics.behavior('newtonian', { strength: .5 }),

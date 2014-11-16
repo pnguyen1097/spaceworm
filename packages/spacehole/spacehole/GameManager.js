@@ -9,29 +9,42 @@ var STATE = {
 };
 
 function GameManager() {
-  //this.state = STATE.nunning;
+  var innerWidth = window.innerWidth, innerHeight = window.innerHeight;
+  this.level = new Spacehole.Level();
+  this.renderer = new Spacehole.LevelRenderer(this.level, "viewport", innerWidth, innerHeight);
+  this.world = this.level.world;
+
   this.resume();
 }
 
 GameManager.prototype = {
 
-  restart: function() {
+  restart: function(newLevel) {
 
-    var innerWidth = window.innerWidth, innerHeight = window.innerHeight;
-    var data = Spacehole.generateLevel(innerWidth, innerHeight, 20, 10);
-    console.log(data);
+    if (newLevel) {
+      this.data = Spacehole.generateLevel(innerWidth, innerHeight, 20, 10);
+    } else {
+      if (!this.data) {
+        this.data = Spacehole.generateLevel(innerWidth, innerHeight, 20, 10);
+      }
+    }
 
-    var level = this.level = new Spacehole.Level(data);
-    var renderer = this.renderer =
-      new Spacehole.LevelRenderer(level, "viewport", innerWidth, innerHeight);
-    var world = this.world = level.world;
+    var data = this.data;
 
-    var player = this.player = this.level.player;
+
+    var level = this.level;
+    var renderer = this.renderer;
+    var world = this.world;
+
+
+
+    level.resetData(data);
+    renderer.update();
+    var player = this.level.player;
 
     var self = this;
     Physics.util.ticker.on(function( time, dt ){
       if (self.turningRight) {
-        console.log('turningRight');
         player.turn(5);
       } else if (self.turningLeft) {
         player.turn(-5);
@@ -52,7 +65,10 @@ GameManager.prototype = {
 
     world.render();
 
-    this.startListening();
+    if (!this.startedListening) {
+      this.startListening();
+      this.startedListening = true;
+    }
 
     this.noThrustSprite = renderer.renderer.createDisplay('sprite', {
       texture: 'images/SpaceShip.png',
@@ -74,6 +90,7 @@ GameManager.prototype = {
     this.noThrustSprite.visible = false;
 
 
+    this.resume();
   },
 
   startListening: function() {
@@ -97,7 +114,6 @@ GameManager.prototype = {
   },
 
   handleCollision: function(data) {
-    console.log(data);
     var player = null, body = null;
     if (data.bodyA.body_type === 'ship') { player = data.bodyA; }
     if (data.bodyB.body_type === 'ship') { player = data.bodyB; }
@@ -115,7 +131,9 @@ GameManager.prototype = {
   },
 
   handleKeyDown: function(event) {
+    console.log(event.keyCode);
     if (event.keyCode === 80) {
+      console.log(this.state);
       if (this.state === STATE.Paused) {
         this.resume();
       } else if (this.state === STATE.Running) {
@@ -137,44 +155,56 @@ GameManager.prototype = {
       this.turningRight = false;
     } else if (event.keyCode === 37) { // Left
       this.turningLeft = false;
+    } else if (event.keyCode === 82) {
+      this.restart();
+    } else if (event.keyCode === 78) {
+      this.restart(true);
     }
   },
 
   updateShipImage: function() {
     var renderer = this.renderer.renderer;
+    var player = this.level.player;
       if (this.thrusting) {
-        this.player.view = this.thrustSprite;
+        player.view = this.thrustSprite;
         this.noThrustSprite.visible = false;
       } else {
-        this.player.view = this.noThrustSprite;
+        player.view = this.noThrustSprite;
         this.thrustSprite.visible = false;
       }
-      this.player.view.visible = true;
-      this.player.view.scale = new PIXI.Point(this.player.radius / 100.0, this.player.radius / 100.0);
+      player.view.visible = true;
+      player.view.scale = new PIXI.Point(player.radius / 100.0, player.radius / 100.0);
   },
 
   resume: function() {
     console.log('resuming');
     this.state = STATE.Running;
     Physics.util.ticker.start();
+    document.querySelector('#gameState').innerHTML = "";
+    console.log('set hidden');
+    document.querySelector('#overlay').style.visibility = "hidden";
   },
 
   pause: function() {
     console.log('pausing');
     this.state = STATE.Paused;
     Physics.util.ticker.stop();
+    document.querySelector('#gameState').innerHTML = "Paused";
+    document.querySelector('#overlay').style.visibility = "visible";
   },
 
   win: function() {
     console.log('Winning!');
     this.state = STATE.Win;
     this.pause();
+    document.querySelector('#gameState').innerHTML = "You Won!";
   },
 
   lose: function() {
     console.log('Losing!');
     this.state = STATE.Lose;
     this.pause();
+    document.querySelector('#gameState').innerHTML = "You Lose!<br/>";
   }
 
 };

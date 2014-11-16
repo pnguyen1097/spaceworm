@@ -1,6 +1,7 @@
 var Physics = this.Physics;
 
 function Attractor(options) {
+  options = options || {};
   options.strength = 10;
   options.max = 50;
 

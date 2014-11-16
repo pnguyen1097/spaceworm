@@ -79,15 +79,16 @@ GameManager.prototype = {
 
   startListening: function() {
     
+    self = this;  
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
 
     this.world.on('interact:poke', this.handlePoke.bind(this));
 
     this.renderer.renderer.el.addEventListener('mousemove', function( e ){
-       // console.log(e);
-
-//        PixiRenderer.createLine(from, to, {}); //Empty object is style.
+      var theta = Math.atan2(pos.y - y, pos.x - x);
+      self.player.angular.pos = theta;
+      self.player.recalc(); 
     });
 
     var world = this.world;

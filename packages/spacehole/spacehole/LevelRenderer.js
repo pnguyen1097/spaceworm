@@ -1,4 +1,3 @@
-console.log(Physics);
 var Physics = this.Physics;
 
 function LevelRenderer(level, canvasId, width, height) {

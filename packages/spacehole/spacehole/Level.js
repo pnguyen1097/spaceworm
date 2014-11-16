@@ -25,7 +25,7 @@ function Level() {
   data.planets.forEach(function(planet) {
 
     //TODO: replace body with a planet class
-    self.world.addBody(new Physics.body('circle', {
+    self.world.addBody(Spacehole.StaticStar({
       x: planet.x,
       y: planet.y,
       radius: planet.r,

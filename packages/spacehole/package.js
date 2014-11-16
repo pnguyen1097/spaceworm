@@ -20,6 +20,7 @@ Package.onUse(function (api) {
   // Specify the source code for the package.
   api.addFiles([
     'Spacehole.js',
+    'spacehole/StaticStar.js',
     'spacehole/Level.js',
     'spacehole/LevelRenderer.js'
   ]);

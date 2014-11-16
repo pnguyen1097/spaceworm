@@ -25,6 +25,7 @@ Package.onUse(function (api) {
     'spacehole/Wormhole.js',
     'spacehole/Attractor.js',
     'spacehole/Ship.js',
+    'spacehole/generateLevel.js',
     'spacehole/Level.js',
     'spacehole/LevelRenderer.js',
     'spacehole/GameManager.js'

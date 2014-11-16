@@ -20,7 +20,7 @@ function Level(data) {
       x: star.x,
       y: star.y,
       radius: star.r,
-      mass: 0.1 * star.r
+      mass: 0.035 * star.r
     }));
   });
 
@@ -29,7 +29,7 @@ function Level(data) {
       x: star.x,
       y: star.y,
       radius: star.r,
-      mass: 0.1 * star.r
+      mass: 0.035 * star.r
     }));
   });
 

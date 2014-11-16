@@ -13,8 +13,9 @@ function Level(data) {
   self.start = data.start;
   self.end = data.end;
 
+
+
   data.static_star.forEach(function(star) {
-    //TODO: replace body with a planet class
     self.world.addBody(Spacehole.StaticStar({
       x: star.x,
       y: star.y,
@@ -24,7 +25,6 @@ function Level(data) {
   });
 
   data.dynamic_star.forEach(function(star) {
-    //TODO: replace body with a planet class
     self.world.addBody(Spacehole.DynamicStar({
       x: star.x,
       y: star.y,
@@ -40,6 +40,13 @@ function Level(data) {
   self.world.add(Spacehole.Attractor({
     pos: data.end
   }));
+
+  self.player = Spacehole.Ship({
+    x: data.start.x,
+    y: data.start.y
+  });
+
+  self.world.addBody(self.player)
 
   self.world.add([
     Physics.behavior('newtonian', { strength: .5 }),

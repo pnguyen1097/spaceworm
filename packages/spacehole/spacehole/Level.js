@@ -1,19 +1,6 @@
 var Physics = this.Physics;
 
-var data = {
-  start: { x: 100, y: 100 },
-  end: { x: 300, y: 300 },
-  static_star: [
-    { x: 200, y: 200, r: 30 },
-    { x: 500, y: 250, r: 40 },
-  ],
-  dynamic_star: [
-    { x: 300, y: 200, r: 8 },
-    { x: 500, y: 150, r: 8 },
-  ]
-};
-
-function Level() {
+function Level(data) {
 
   var self = this;
 

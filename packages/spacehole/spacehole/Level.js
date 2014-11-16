@@ -3,9 +3,13 @@ var Physics = this.Physics;
 var data = {
   start: { x: 100, y: 100 },
   end: { x: 600, y: 600 },
-  planets: [
+  static_star: [
     { x: 200, y: 200, r: 30 },
-    { x: 500, y: 250, r: 80 },
+    { x: 500, y: 250, r: 40 },
+  ],
+  dynamic_star: [
+    { x: 300, y: 200, r: 8 },
+    { x: 500, y: 150, r: 8 },
   ]
 };
 
@@ -22,16 +26,24 @@ function Level() {
   self.start = data.start;
   self.end = data.end;
 
-  data.planets.forEach(function(planet) {
-
+  data.static_star.forEach(function(star) {
     //TODO: replace body with a planet class
     self.world.addBody(Spacehole.StaticStar({
-      x: planet.x,
-      y: planet.y,
-      radius: planet.r,
-      mass: 0.1 * planet.r
+      x: star.x,
+      y: star.y,
+      radius: star.r,
+      mass: 0.1 * star.r
     }));
+  });
 
+  data.dynamic_star.forEach(function(star) {
+    //TODO: replace body with a planet class
+    self.world.addBody(Spacehole.DynamicStar({
+      x: star.x,
+      y: star.y,
+      radius: star.r,
+      mass: 0.1 * star.r
+    }));
   });
 
   self.world.add([

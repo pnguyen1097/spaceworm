@@ -21,6 +21,7 @@ Package.onUse(function (api) {
   api.addFiles([
     'Spacehole.js',
     'spacehole/StaticStar.js',
+    'spacehole/DynamicStar.js',
     'spacehole/Level.js',
     'spacehole/LevelRenderer.js'
   ]);

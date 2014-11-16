@@ -4,6 +4,7 @@ function Ship(options) {
   options.radius = 15;
   options.mass = 0.1 * options.radius;
   options.restitution = 0;
+  options.treatment = 'static';
 
   var body = new Physics.body('circle', options);
   body.body_type = 'ship';

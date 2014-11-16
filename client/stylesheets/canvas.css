@@ -1,3 +1,11 @@
 #viewport {
   background: black url("images/Starfield.png") repeat scroll center;
 }
+
+#gameState {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}

@@ -28,10 +28,11 @@ GameManager.prototype = {
 
     var player = this.player = this.level.player;
 
+    world.add(Physics.behavior('interactive', {el: renderer.renderer.el}));
+
     var self = this;
     Physics.util.ticker.on(function( time, dt ){
       if (self.turningRight) {
-        console.log('turningRight');
         player.turn(5);
       } else if (self.turningLeft) {
         player.turn(-5);
@@ -77,8 +78,17 @@ GameManager.prototype = {
   },
 
   startListening: function() {
+    
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
+
+    this.world.on('interact:poke', this.handlePoke.bind(this));
+
+    this.renderer.renderer.el.addEventListener('mousemove', function( e ){
+       // console.log(e);
+
+//        PixiRenderer.createLine(from, to, {}); //Empty object is style.
+    });
 
     var world = this.world;
     world.on('collisions:detected', function( data ){
@@ -94,6 +104,28 @@ GameManager.prototype = {
 
     this.world.on('collision-pair', this.handleCollision.bind(this));
 
+  },
+
+  handlePoke: function( pos ){ 
+ 
+    var vectorScratch = Physics.scratchpad()
+    var amount = 0.00001;
+    var launchVector = vectorScratch.vector().set( 
+      amount * pos.x, 
+      amount * pos.y );
+    
+    var x = this.player.state.pos.x;
+    var y = this.player.state.pos.y;
+
+    var theta = Math.atan2(pos.y - y, pos.x - x);
+    this.player.state.angular.pos = theta;
+    this.player.treatment = 'dynamic';
+    this.player.recalc();
+    this.player.accelerate(launchVector);
+    
+    this.world.removeBehavior('interactive'); 
+    this.world.off('interact:poke');
+    vectorScratch.done();
   },
 
   handleCollision: function(data) {

@@ -52,7 +52,7 @@ function Level(data) {
     Physics.behavior('newtonian', { strength: .5 }),
     Physics.behavior('body-impulse-response'),
     Physics.behavior('body-collision-detection'),
-    Physics.behavior('sweep-prune')
+    Physics.behavior('sweep-prune'),
   ]);
 
 }

@@ -13,6 +13,7 @@ function LevelRenderer(level, canvasId, width, height) {
 
   var world = level.world;
   world.add(this.renderer);
+  
   world.on('step', function() {
     world.render();
   });

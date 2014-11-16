@@ -44,8 +44,8 @@ function LevelRenderer(level, canvasId, width, height) {
           y: 0.5
         },
       });
+      body.view.visible = false;
       body.view.scale = new PIXI.Point(body.radius / 100.0, body.radius / 100.0);
-      body.view.rotate = Math.PI / 3;
     }
   });
 

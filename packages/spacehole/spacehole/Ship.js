@@ -16,7 +16,7 @@ function Ship(options) {
   body.thrust = function(amount) {
     var angle = this.state.angular.pos;
     var scratch = Physics.scratchpad();
-    amount *= 0.0001;
+    amount *= 0.00007;
     var v = scratch.vector().set(
       amount * Math.cos( angle ),
       amount * Math.sin( angle )

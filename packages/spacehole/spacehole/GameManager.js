@@ -55,12 +55,34 @@ GameManager.prototype = {
         player.thrust(0);
       }
 
+      self.updateShipImage();
+
       world.step(time);
     });
 
     world.render();
 
     this.startListening();
+
+    this.noThrustSprite = renderer.renderer.createDisplay('sprite', {
+      texture: 'images/SpaceShip.png',
+      anchor: {
+        x: 0.5,
+        y: 0.5
+      },
+    });
+
+    this.thrustSprite = renderer.renderer.createDisplay('sprite', {
+      texture: 'images/SpaceShipFiring.png',
+      anchor: {
+        x: 0.5,
+        y: 0.5
+      },
+    });
+
+    this.thrustSprite.visible = false;
+    this.noThrustSprite.visible = false;
+
 
   },
 
@@ -126,6 +148,19 @@ GameManager.prototype = {
     } else if (event.keyCode === 37) { // Left
       this.turningLeft = false;
     }
+  },
+
+  updateShipImage: function() {
+    var renderer = this.renderer.renderer;
+      if (this.thrusting) {
+        this.player.view = this.thrustSprite;
+        this.noThrustSprite.visible = false;
+      } else {
+        this.player.view = this.noThrustSprite;
+        this.thrustSprite.visible = false;
+      }
+      this.player.view.visible = true;
+      this.player.view.scale = new PIXI.Point(this.player.radius / 100.0, this.player.radius / 100.0);
   },
 
   resume: function() {

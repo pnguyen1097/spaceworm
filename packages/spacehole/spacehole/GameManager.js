@@ -17,21 +17,11 @@ GameManager.prototype = {
 
   restart: function() {
 
-    var data = {
-      start: { x: 100, y: 100 },
-      end: { x: 300, y: 300 },
-      static_star: [
-        { x: 400, y: 400, r: 10 },
-        { x: 500, y: 250, r: 20 },
-      ],
-      dynamic_star: [
-        //{ x: 300, y: 200, r: 8 },
-        //{ x: 500, y: 150, r: 8 },
-      ]
-    };
+    var innerWidth = window.innerWidth, innerHeight = window.innerHeight;
+    var data = Spacehole.generateLevel(innerWidth, innerHeight, 20, 10);
+    console.log(data);
 
     var level = this.level = new Spacehole.Level(data);
-    var innerWidth = window.innerWidth, innerHeight = window.innerHeight;
     var renderer = this.renderer =
       new Spacehole.LevelRenderer(level, "viewport", innerWidth, innerHeight);
     var world = this.world = level.world;

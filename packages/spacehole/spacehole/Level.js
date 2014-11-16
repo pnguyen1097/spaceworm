@@ -2,7 +2,7 @@ var Physics = this.Physics;
 
 var data = {
   start: { x: 100, y: 100 },
-  end: { x: 600, y: 600 },
+  end: { x: 300, y: 300 },
   static_star: [
     { x: 200, y: 200, r: 30 },
     { x: 500, y: 250, r: 40 },
@@ -45,6 +45,11 @@ function Level() {
       mass: 0.1 * star.r
     }));
   });
+
+  self.world.add(Spacehole.Wormhole({
+      x: data.end.x,
+      y: data.end.y
+  }));
 
   self.world.add([
     Physics.behavior('newtonian', { strength: .5 }),

@@ -22,6 +22,7 @@ Package.onUse(function (api) {
     'Spacehole.js',
     'spacehole/StaticStar.js',
     'spacehole/DynamicStar.js',
+    'spacehole/Wormhole.js',
     'spacehole/Level.js',
     'spacehole/LevelRenderer.js'
   ]);

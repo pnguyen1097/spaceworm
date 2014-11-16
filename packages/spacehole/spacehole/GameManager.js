@@ -109,13 +109,14 @@ GameManager.prototype = {
   handlePoke: function( pos ){ 
  
     var vectorScratch = Physics.scratchpad()
-    var amount = 0.00001;
-    var launchVector = vectorScratch.vector().set( 
-      amount * pos.x, 
-      amount * pos.y );
-    
+
     var x = this.player.state.pos.x;
     var y = this.player.state.pos.y;
+    var amount = 0.001;
+    var launchVector = vectorScratch.vector().set( 
+      amount * (pos.x - x), 
+      amount * (pos.y - y));
+    
 
     var theta = Math.atan2(pos.y - y, pos.x - x);
     this.player.state.angular.pos = theta;

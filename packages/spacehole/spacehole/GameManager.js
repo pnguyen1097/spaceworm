@@ -112,7 +112,7 @@ GameManager.prototype = {
 
     var x = this.player.state.pos.x;
     var y = this.player.state.pos.y;
-    var amount = 0.001;
+    var amount = 0.00005;
     var launchVector = vectorScratch.vector().set( 
       amount * (pos.x - x), 
       amount * (pos.y - y));
@@ -175,7 +175,7 @@ GameManager.prototype = {
 
   updateShipImage: function() {
     var renderer = this.renderer.renderer;
-      if (this.thrusting) {
+      if (this.thrusting && this.player.treatment === 'dynamic') {
         this.player.view = this.thrustSprite;
         this.noThrustSprite.visible = false;
       } else {

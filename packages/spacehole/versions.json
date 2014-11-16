@@ -1,6 +1,10 @@
 {
   "dependencies": [
     [
+      "brentjanderson:buzz",
+      "1.1.7"
+    ],
+    [
       "meteor",
       "1.1.3"
     ],

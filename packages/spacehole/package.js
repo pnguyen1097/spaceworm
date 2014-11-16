@@ -11,6 +11,7 @@ Package.onUse(function (api) {
   // Use Underscore package, but only on the server.
   // Version not specified, so it will be as of Meteor 0.9.0.
   api.use('physicsjs');
+  api.use('brentjanderson:buzz');
   // Use application-configuration package, version 1.0.0 or newer.
   //api.use('application-configuration@1.0.0');
   // Give users of this package access to the Templating package.
@@ -26,6 +27,7 @@ Package.onUse(function (api) {
     'spacehole/Attractor.js',
     'spacehole/Ship.js',
     'spacehole/generateLevel.js',
+    'spacehole/Spacemusic.js',
     'spacehole/Level.js',
     'spacehole/LevelRenderer.js',
     'spacehole/GameManager.js'

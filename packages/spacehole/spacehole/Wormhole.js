@@ -2,7 +2,7 @@ var Physics = this.Physics;
 
 function Wormhole(options) {
   options.treatment = 'static';
-  options.radius = 5;
+  options.radius = 10;
   options.mass = 0.0001;
 
   var body = new Physics.body('circle', options);

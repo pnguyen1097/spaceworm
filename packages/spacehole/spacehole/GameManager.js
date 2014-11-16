@@ -31,7 +31,9 @@ GameManager.prototype = {
     };
 
     var level = this.level = new Spacehole.Level(data);
-    var renderer = this.renderer = new Spacehole.LevelRenderer(level, "viewport", 800, 600);
+    var innerWidth = window.innerWidth, innerHeight = window.innerHeight;
+    var renderer = this.renderer =
+      new Spacehole.LevelRenderer(level, "viewport", innerWidth, innerHeight);
     var world = this.world = level.world;
 
     var player = this.player = this.level.player;

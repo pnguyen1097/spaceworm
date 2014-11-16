@@ -15,6 +15,8 @@ function GameManager() {
   this.world = this.level.world;
 
   this.resume();
+
+  this.score = 0;
 }
 
 GameManager.prototype = {
@@ -197,7 +199,10 @@ GameManager.prototype = {
     console.log('Winning!');
     this.state = STATE.Win;
     this.pause();
+    this.score = this.score + 1;
+
     document.querySelector('#gameState').innerHTML = "You Won!";
+    document.querySelector('#score').innerHTML = "Score: " + this.score;
   },
 
   lose: function() {

@@ -26,7 +26,7 @@ function LevelGenerator(canvasWidth, canvasHeight) {
 
   function setStaticStars() {
     data.static_star = [];
-    for (var i = 0; i < randomN(2,5); i++) {
+    for (var i = 0; i < randomN(1,3); i++) {
       var star = {};
       star.x = randomN(canvasWidth * 0.25, canvasWidth * 0.5);
       star.y = randomN(0, canvasHeight);

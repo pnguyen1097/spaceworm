@@ -155,12 +155,14 @@ GameManager.prototype = {
 
   resume: function() {
     console.log('resuming');
+    Spacehole.playMusic();
     this.state = STATE.Running;
     Physics.util.ticker.start();
   },
 
   pause: function() {
     console.log('pausing');
+    Spacehole.pauseMusic();
     this.state = STATE.Paused;
     Physics.util.ticker.stop();
   },

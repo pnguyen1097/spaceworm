@@ -84,9 +84,15 @@ GameManager.prototype = {
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
 
     this.world.on('interact:poke', this.handlePoke.bind(this));
-
+    var initialPos = this.player.state.pos;
+    console.log(this.player.state.pos);
     this.renderer.renderer.el.addEventListener('mousemove', function( e ){
-      var theta = Math.atan2(pos.y - y, pos.x - x);
+      var to = {
+        x: e.pageX,
+        y: e.pageY
+      };
+      
+      var theta = Math.atan2(to.y - initialPos.y, to.x - intialPos.x);
       self.player.angular.pos = theta;
       self.player.recalc(); 
     });
@@ -126,7 +132,7 @@ GameManager.prototype = {
     this.player.accelerate(launchVector);
     
     this.world.removeBehavior('interactive'); 
-    this.world.off('interact:poke');
+    //this.renderer.renderer.el.removeEventListener(); 
     vectorScratch.done();
   },
 
